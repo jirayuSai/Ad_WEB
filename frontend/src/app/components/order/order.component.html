@@ -1,0 +1,34 @@
+<app-sidebar></app-sidebar>
+<div class="container-fluid" >
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Order</h2>
+        <div class="table-responsive-md">  
+        <table class="table table-striped table-inverse">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>No.</th>
+                    <th>รายละเอียด</th>
+                    <th>ราคารวม</th>
+                    <th>สถานะ</th>
+                    <th>โอนเงิน</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of orders; index as i">
+                    <td scope="row">{{i+1}}</td>
+                    <td>{{item.detail}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.status}}</td>
+                    <td><input *ngIf="item.status != 'success'" id="formFileSm" type="file" (change)="onChangeImg($event,i)">   
+                        <span *ngIf="item.status == 'success'" class="success">รอรับของ</span>
+                        <button *ngIf="status[i] && item.status == 'tranfer'" type="button" class="btn btn-primary" (click)="putOrder(i)">ยืนยัน</button>
+                        <button *ngIf="item.status != 'success'" id="cancle" type="button" class="btn btn-danger" (click)="deleteOrder(i)">ยกเลิก</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
